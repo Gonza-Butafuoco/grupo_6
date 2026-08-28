@@ -2,7 +2,6 @@ def loadUserTexts():
     first_text = str(input("Ingresá el primer texto: "))
     second_text = str(input("Ingresá el segundo texto: "))
 
-    print(first_text)
     while first_text == "" or second_text == "":
         if first_text == "":
             first_text = str(input("Ingresá el primer texto: "))

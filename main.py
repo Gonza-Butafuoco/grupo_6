@@ -1,22 +1,19 @@
-def loadUserTexts():
-    first_text = str(input("Ingresá el primer texto: "))
-    second_text = str(input("Ingresá el segundo texto: "))
-
-    while first_text == "" or second_text == "":
-        if first_text == "":
-            first_text = str(input("Ingresá el primer texto: "))
-        else:
-            second_text = str(input("Ingresá el segundo texto: "))
-
-    return [first_text, second_text]
-
+import handler
 
 def main():
-    print("1) Cargar texto")
+    while True:
+        print("\n--- TextCompare ---")
+        print("1) Cargar textos para comparar")
+        print("2) Salir")
+        
+        option = input("Elegí una opción: ")
 
-    texts = loadUserTexts()
-
-    print(texts[0], texts[1])
-
+        if option == "1":
+            handler.start_comparison()
+        elif option == "2":
+            print("Saliendo del sistema TextCompare...")
+            break
+        else:
+            print("Opción inválida. Por favor, ingresá 1 o 2.")
 
 main()

@@ -2,7 +2,7 @@ def calculate_similarity(list1, list2):
     """
     Objetivo: Calcular el porcentaje de similitud entre dos textos
     Parametros: dos listas de palabras
-    Salida: numero con el porcentaje
+    Salida: numero flotante con el porcentaje
     """
     # TODO:  Acá hay que sacar el porcentaje real (0 a 100).
     # Como el alcance pide usar conjuntos, pueden convertir las listas a set()

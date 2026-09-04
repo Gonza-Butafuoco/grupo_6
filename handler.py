@@ -21,9 +21,12 @@ def start_comparison():
     matches = actions.find_matches(list1, list2)
     similarity = actions.calculate_similarity(list1, list2)
     
-    print(f"\nSe encontraron {len(matches)} palabras en común.")
-    print(f"Palabras: {matches}")
-    print(f"Porcentaje de similitud: {similarity}%")
+    print("\n+------------------------------+")
+    print("|       RESULTADO             |")
+    print("+------------------------------+")
+    print(f"| Palabras en común: {len(matches):4} |")
+    print(f"Similitud: {similarity}%")
+    print("+------------------------------+")
     
     # TODO: Mejorar el print de las coincidencias y armar
     # bien la logica del porcentaje en actions.py.

@@ -39,12 +39,16 @@ def find_matches(list1, list2):
     """
     Objetivo: Identificar palabras que se repiten en ambos textos
     Parametros: dos listas de palabras
-    Salida: lista con palabras repetidas
+    Salida: Diccionario con repetidas, cuenta total de palabras repetidas y cuenta total de palabras unicas
     """
     matches = []
-    
+
     for word in list1:
         if word in list2 and word not in matches:
             matches.append(word)
             
-    return matches
+    return {
+        "matches": matches,
+        "count_total_matches": len(matches),
+        "count_unique_words": (len(list1) + len(list2)) - len(matches)
+    }

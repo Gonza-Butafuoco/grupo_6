@@ -18,7 +18,7 @@ def process_text(text):
     final_words = list(filter(lambda w: len(w) > 0, words_without_signs))
 
     for word in final_words:
-        repeated_words[word] = repeated_words[word, 0] + 1
+        repeated_words[word] = repeated_words.get[word, 0] + 1
 
 
     return {

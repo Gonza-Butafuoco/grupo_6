@@ -1,5 +1,58 @@
 import utils
+import text_storage
 import actions
+
+
+    
+def read_multiline_text():
+    """
+    Objetivo: Permitir al usuario ingresar un texto de varias líneas
+    Parametros: Ninguno
+    Salida: texto ingresado (string)
+    """
+    print("\nPega el texto.")
+    print('cuando termunes de escribir el texto , ingresa la palabra FIN en una linea separada: \n')
+    
+    lines = []
+    
+    line = input() 
+    
+    while line.strip() != 'FIN':
+        lines.append(line)
+        line = input()
+        
+    return "\n".join(lines)
+
+def load_text():
+    """
+    Objetivo: Gestionar la carga de un texto y guardarlo en el diccionario de textos
+    Parametros: Ninguno
+    Salida: Ninguna
+    """
+    name = input("Ingresá un nombre para el texto: ")
+    
+    text = read_multiline_text()
+    
+    text_storage.save_text(name, text)
+    
+    print(f"Texto '{name}' cargado exitosamente.")
+    
+def show_texts():
+    texts = text_storage.getall_texts()
+    
+    if len(texts) == 0:
+        print("No hay textos cargados.")
+        return
+    
+    print("\n--- Textos Cargados ---")
+    
+    for name , text in texts.items():
+        print('Nombre del texto:')
+        print(f"- {name}")
+        print("Texto:")
+        print(f"- {text}")
+        print("------------------------------")
+
 
 def start_comparison():
     """
@@ -7,28 +60,30 @@ def start_comparison():
     Parametros: Ninguno
     Salida: Ninguna
     """
-    print("\n--- Carga de Textos ---")
-    text1 = input("Pegá el primer texto: ")
-    text2 = input("Pegá el segundo texto: ")
-
-    if len(text1) == 0 or len(text2) == 0:
-        print("Error: Uno o ambos textos están vacíos.")
-        return 
-
-    list1 = utils.process_text(text1)
-    list2 = utils.process_text(text2)
+    #utilizar load Text ahora que ya tenemos la funcion para cargar textos
     
-    matches = actions.find_matches(list1, list2)
+    # print("\n--- Carga de Textos ---")
+    # text1 = input("Pegá el primer texto: ")
+    # text2 = input("Pegá el segundo texto: ")
 
-    #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
-    similarity = actions.calculate_similarity(list1, list2)
+    # if len(text1) == 0 or len(text2) == 0:
+    #     print("Error: Uno o ambos textos están vacíos.")
+    #     return 
+
+    # list1 = utils.process_text(text1)
+    # list2 = utils.process_text(text2)
     
-    print("\n+------------------------------+")
-    print("|       RESULTADO             |")
-    print("+------------------------------+")
-    print(f"| Palabras en común: {len(matches):4} |")
-    print(f"Similitud: {similarity}%")
-    print("+------------------------------+")
+    # matches = actions.find_matches(list1, list2)
+
+    # #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
+    # similarity = actions.calculate_similarity(list1, list2)
+    
+    # print("\n+------------------------------+")
+    # print("|       RESULTADO             |")
+    # print("+------------------------------+")
+    # print(f"| Palabras en común: {len(matches):4} |")
+    # print(f"Similitud: {similarity}%")
+    # print("+------------------------------+")
     
     # TODO: Mejorar el print de las coincidencias y armar
-    # bien la logica del porcentaje en actions.py.
+    # bien la logica del porcentaje en actions.py.    

@@ -35,20 +35,19 @@ def calculate_similarity(list1, list2):
     
     return round(porcentaje_similitud,2)
 
-def find_matches(list1, list2):
+def find_matches(text1, text2):
     """
     Objetivo: Identificar palabras que se repiten en ambos textos
     Parametros: dos listas de palabras
     Salida: Diccionario con repetidas, cuenta total de palabras repetidas y cuenta total de palabras unicas
     """
-    matches = []
+    setOfText1 = set(text1)
+    matches = setOfText1.intersection(text2)
 
-    for word in list1:
-        if word in list2 and word not in matches:
-            matches.append(word)
             
     return {
         "matches": matches,
         "count_total_matches": len(matches),
-        "count_unique_words": (len(list1) + len(list2)) - len(matches)
+        "list_unique_words": setOfText1.symmetric_difference(text2),
+        "total_unique_words": len(setOfText1.symmetric_difference(text2))
     }

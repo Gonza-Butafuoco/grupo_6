@@ -9,7 +9,7 @@ def process_text(text):
 
     repeated_words = {}
     
-    words = text.lower().split()
+    words = text.lower().split(" ")
     
     # map aplica el lambda para sacar los signos de las puntas de cada palabra
     words_without_signs = list(map(lambda w: w.strip(".,;:!?()¿¡"), words))
@@ -18,8 +18,7 @@ def process_text(text):
     final_words = list(filter(lambda w: len(w) > 0, words_without_signs))
 
     for word in final_words:
-        repeated_words[word] = repeated_words.get[word, 0] + 1
-
+        repeated_words[word] = repeated_words.get(word, 0) + 1
 
     return {
         "normalized_text": final_words,

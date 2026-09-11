@@ -21,12 +21,12 @@ def start_comparison():
     matches = actions.find_matches(list1, list2)
 
     #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
-    similarity = actions.calculate_similarity(list1, list2)
+    similarity = actions.calculate_similarity(matches)
     
     print("\n+------------------------------+")
     print("|       RESULTADO             |")
     print("+------------------------------+")
-    print(f"| Palabras en común: {len(matches):4} |")
+    print(f"| Palabras en común: {matches["count_total_matches"]} |")
     print(f"Similitud: {similarity}%")
     print("+------------------------------+")
     

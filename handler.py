@@ -15,10 +15,10 @@ def start_comparison():
         print("Error: Uno o ambos textos están vacíos.")
         return 
 
-    list1 = utils.process_text(text1)
-    list2 = utils.process_text(text2)
+    dataOfText1 = utils.process_text(text1)
+    dataOfText2 = utils.process_text(text2)
     
-    matches = actions.find_matches(list1, list2)
+    matches = actions.find_matches(dataOfText1["normalized_text"], dataOfText2["normalized_text"])
 
     #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
     similarity = actions.calculate_similarity(matches)

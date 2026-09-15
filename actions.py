@@ -24,7 +24,6 @@ def find_matches(text1, text2):
     """
     setOfText1 = set(text1)
     matches = setOfText1.intersection(text2)
-
             
     return {
         "matches": matches,

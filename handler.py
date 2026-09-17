@@ -70,20 +70,20 @@ def start_comparison():
     #     print("Error: Uno o ambos textos están vacíos.")
     #     return 
 
-    # list1 = utils.process_text(text1)
-    # list2 = utils.process_text(text2)
+    dataOfText1 = utils.process_text(text1)
+    dataOfText2 = utils.process_text(text2)
     
-    # matches = actions.find_matches(list1, list2)
+    matches = actions.find_matches(dataOfText1["normalized_text"], dataOfText2["normalized_text"])
 
-    # #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
-    # similarity = actions.calculate_similarity(list1, list2)
+    #TODO: ahora calculate_similarity, deberia de recibir 'matches' tambien ya que hace toda la logica de deduplicacion
+    similarity = actions.calculate_similarity(matches)
     
-    # print("\n+------------------------------+")
-    # print("|       RESULTADO             |")
-    # print("+------------------------------+")
-    # print(f"| Palabras en común: {len(matches):4} |")
-    # print(f"Similitud: {similarity}%")
-    # print("+------------------------------+")
+    print("\n+------------------------------+")
+    print("|       RESULTADO             |")
+    print("+------------------------------+")
+    print(f"| Palabras en común: {matches["count_total_matches"]} |")
+    print(f"Similitud: {similarity}%")
+    print("+------------------------------+")
     
     # TODO: Mejorar el print de las coincidencias y armar
     # bien la logica del porcentaje en actions.py.    

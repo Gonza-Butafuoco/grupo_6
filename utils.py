@@ -1,4 +1,5 @@
 from functools import reduce
+import re
 
 def process_text(text):
     """
@@ -7,24 +8,33 @@ def process_text(text):
     Salida: Diccionario con lista de palabras finales y diccionario de la cantidad de veces que se repite las palabras
     """
 
+    # Validación del texto
+    if not text or not text.strip():
+        return None
+
     repeated_words = {}
     
-    words = text.lower().split()
-    
-    # map aplica el lambda para sacar los signos de las puntas de cada palabra
-    words_without_signs = list(map(lambda w: w.strip(".,;:!?()¿¡"), words))
+    #Pasamos a minuscula el textp
+    text = text.lower()
+
+    # Expresion regular que cumpla con los caracteres
+    patron = r'[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]'
+    textoNormalizado=re.sub(patron,'', text)
+
+    #Separamos el texto
+    words = textoNormalizado.split()
     
     # filter y lambda descartan los elementos que quedaron vacíos
-    final_words = list(filter(lambda w: len(w) > 0, words_without_signs))
+    final_words = list(filter(lambda w: len(w) > 0, words))
 
     for word in final_words:
         repeated_words[word] = repeated_words.get(word, 0) + 1
-
 
     return {
         "normalized_text": final_words,
         "repeated_words": repeated_words
     }
+
 
 def sum_total_words(list1, list2):
     """

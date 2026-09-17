@@ -17,7 +17,7 @@ def get_text(name):
     """
     return texts.get(name)
         
-def getall_texts():
+def get_all_texts():
     """
     Objetivo: Obtener todos los textos del diccionario de textos
     Parametros: Ninguno

@@ -10,6 +10,7 @@ def main():
         print("2) Mostrar textos cargados")
         print("3) Comparar textos cargados")
         print("4) Comparar textos ahora")
+        print("5) Eliminar texto")
         print("0) Salir")
 
         option = input("Elegí una opción: ")
@@ -26,11 +27,14 @@ def main():
         elif option == "4":
             handler.compare_texts_now()
 
+        elif option == "5":
+            handler.delete_loaded_text()
+
         elif option == "0":
             print("Saliendo del sistema ElPlagio...")
 
         else:
-            print("Opción inválida. Por favor, ingresá una opción entre 0 y 4.")
+            print("Opción inválida. Por favor, ingresá una opción entre 0 y 5.")
 
 
 main()

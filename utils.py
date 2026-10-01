@@ -9,12 +9,15 @@ def process_text(text):
     """
 
     # Validación del texto
-    if not text or not text.strip():
-        return None
+    if not isinstance(text, str):
+        raise TypeError("El texto debe ser de tipo string.")
+
+    if not text.strip():
+        raise ValueError("El texto no puede estar vacío.")
 
     repeated_words = {}
     
-    #Pasamos a minuscula el textp
+    #Pasamos a minuscula el texto
     text = text.lower()
 
     # Expresion regular que cumpla con los caracteres

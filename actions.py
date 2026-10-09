@@ -10,11 +10,12 @@ def calculate_similarity(dataOfMatches):
     total_matches = dataOfMatches["count_total_matches"]
     total_unique_words = dataOfMatches["total_unique_words"]
     
-    if total_unique_words == 0:
+    try:
+        similarity_percentage = (total_matches / total_unique_words) * 100
+    except ZeroDivisionError:
         return 0.0
-    
-    similarity_percentage = (total_matches / total_unique_words) * 100
-    return round(similarity_percentage, 2)
+    else:
+        return round(similarity_percentage, 2)
 
 def find_matches(text1, text2):
     """

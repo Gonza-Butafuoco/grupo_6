@@ -5,15 +5,12 @@ def process_text(text):
     """
     Objetivo: Normalizar el texto sacando mayúsculas y signos
     Parametros: texto a limpiar (string)
-    Salida: Diccionario con lista de palabras finales y diccionario de la cantidad de veces que se repite las palabras
+    Salida: Diccionario con palabras y sus cantidades, o None si el texto es inválido
     """
 
     # Validación del texto
-    if not isinstance(text, str):
-        raise TypeError("El texto debe ser de tipo string.")
-
-    if not text.strip():
-        raise ValueError("El texto no puede estar vacío.")
+    if type(text) != str or not text.strip():
+        return None
 
     repeated_words = {}
     

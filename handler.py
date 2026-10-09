@@ -1,7 +1,6 @@
 import utils
 import text_storage
 import actions
-from exceptions import EmptyTextError, NotEnoughTextsError, TextLimitError, TextNotFoundError
 
 
     
@@ -32,14 +31,18 @@ def load_text():
     """
 
     name = input("Ingresá un nombre para el texto: ")
+    texts = text_storage.get_all_texts()
+
+    if len(texts) >= 2 and name not in texts:
+        print("Error: Solo se pueden guardar dos textos.")
+        return
+
     text = read_multiline_text()
 
-    try:
-        text_storage.save_text(name, text)
-    except (EmptyTextError, TextLimitError) as error:
-        print(f"Error: {error}")
-    else:
+    if text_storage.save_text(name, text):
         print(f"Texto '{name}' cargado exitosamente.")
+    else:
+        print("Error: El texto no puede estar vacío.")
     
 def show_texts():
     texts = text_storage.get_all_texts()
@@ -64,25 +67,25 @@ def compare_loaded_texts():
     Salida: Ninguna
     """
 
-    try:
-        text1, text2 = text_storage.get_texts_for_comparison()
-    except NotEnoughTextsError as error:
-        print(f"Error: {error}")
-        return
+    loaded_texts = text_storage.get_texts_for_comparison()
 
-    start_comparison(text1, text2)
+    try:
+        text1 = loaded_texts[0]
+        text2 = loaded_texts[1]
+    except IndexError:
+        print("Error: Necesitás cargar 2 textos antes de compararlos.")
+    else:
+        start_comparison(text1, text2)
 
 
 def delete_loaded_text():
     """Elimina uno de los textos cargados por su nombre."""
     name = input("Ingresá el nombre del texto a eliminar: ")
 
-    try:
-        text_storage.delete_text(name)
-    except TextNotFoundError as error:
-        print(f"Error: {error}")
-    else:
+    if text_storage.delete_text(name):
         print(f"Texto '{name}' eliminado correctamente.")
+    else:
+        print(f"Error: No existe un texto llamado '{name}'.")
     
 def compare_texts_now():
     """
@@ -109,11 +112,11 @@ def start_comparison(text1, text2):
     Salida: Ninguna
     """
 
-    try:
-        data_of_text1 = utils.process_text(text1)
-        data_of_text2 = utils.process_text(text2)
-    except (TypeError, ValueError) as error:
-        print(f"Error procesando los textos: {error}")
+    data_of_text1 = utils.process_text(text1)
+    data_of_text2 = utils.process_text(text2)
+
+    if not data_of_text1 or not data_of_text2:
+        print("Error: Ambos textos deben ser strings y no pueden estar vacíos.")
         return
 
     matches = actions.find_matches(

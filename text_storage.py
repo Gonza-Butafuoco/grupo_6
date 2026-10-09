@@ -1,27 +1,20 @@
 
-from exceptions import (
-    EmptyTextError,
-    NotEnoughTextsError,
-    TextLimitError,
-    TextNotFoundError,
-)
-
-
 texts = {}
 
 def save_text(name , text):
     """
     Objetivo: Guardar un texto en el diccionario de textos
     Parametros: nombre del texto (string), texto a guardar (string)
-    Salida: Ninguna
+    Salida: True si se guardó el texto, False si no cumple las validaciones
     """
-    if not isinstance(text, str) or not text.strip():
-        raise EmptyTextError("El texto no puede estar vacío.")
+    if type(text) != str or not text.strip():
+        return False
 
     if len(texts) >= 2 and name not in texts:
-        raise TextLimitError("Solo se pueden guardar dos textos.")
+        return False
 
     texts[name] = text
+    return True
     
 def get_text(name):
     """
@@ -41,24 +34,20 @@ def get_all_texts():
 
 
 def get_texts_for_comparison():
-    """Obtiene los dos textos cargados como una tupla desempaquetable."""
-    if len(texts) < 2:
-        raise NotEnoughTextsError(
-            "Necesitás cargar 2 textos antes de compararlos."
-        )
-
+    """Devuelve los textos disponibles; el handler maneja los índices faltantes."""
     return tuple(texts.values())
 
 def delete_text(name):
     """
     Objetivo: Eliminar un texto del diccionario de textos
     Parametros: nombre del texto (string)
-    Salida: Ninguna
+    Salida: True si se eliminó el texto, False si el nombre no existe
     """
-    if name not in texts:
-        raise TextNotFoundError(f"No existe un texto llamado '{name}'.")
+    if name in texts:
+        del texts[name]
+        return True
 
-    del texts[name]
+    return False
 
 
 

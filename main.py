@@ -2,9 +2,9 @@ import handler
 
 
 def main():
-    option = ""
+    option = -1
 
-    while option != "0":
+    while option != 0:
         print("\n------ ElPlagio ------")
         print("1) Cargar texto")
         print("2) Mostrar textos cargados")
@@ -13,28 +13,31 @@ def main():
         print("5) Eliminar texto")
         print("0) Salir")
 
-        option = input("Elegí una opción: ")
-
-        if option == "1":
-            handler.load_text()
-
-        elif option == "2":
-            handler.show_texts()
-
-        elif option == "3":
-            handler.compare_loaded_texts()
-
-        elif option == "4":
-            handler.compare_texts_now()
-
-        elif option == "5":
-            handler.delete_loaded_text()
-
-        elif option == "0":
-            print("Saliendo del sistema ElPlagio...")
-
+        try:
+            option = int(input("Elegí una opción: "))
+        except ValueError as e:
+            print(f"Error: Ingresá una opción numérica entre 0 y 5. ({e})")
         else:
-            print("Opción inválida. Por favor, ingresá una opción entre 0 y 5.")
+            if option == 1:
+                handler.load_text()
+
+            elif option == 2:
+                handler.show_texts()
+
+            elif option == 3:
+                handler.compare_loaded_texts()
+
+            elif option == 4:
+                handler.compare_texts_now()
+
+            elif option == 5:
+                handler.delete_loaded_text()
+
+            elif option == 0:
+                print("Saliendo del sistema ElPlagio...")
+
+            else:
+                print("Opción inválida. Por favor, ingresá una opción entre 0 y 5.")
 
 
 main()

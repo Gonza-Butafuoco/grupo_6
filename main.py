@@ -12,7 +12,7 @@ def main():
         print("4) Comparar textos ahora")
         print("5) Eliminar texto")
         print("0) Salir")
-
+        
         try:
             option = int(input("Elegí una opción: "))
         except ValueError as e:
